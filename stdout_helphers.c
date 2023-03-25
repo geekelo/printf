@@ -31,16 +31,47 @@ int _putchar(char c)
  *
  * Return: length of byte written on success, -1 otherwise
  */
-int _puts(char *c)
+int _puts(char *c, int format)
+{
+	char store[1024];
+	int len = _strlen(c);
+
+	if (format == 1)
+	{
+		char *ptr = malloc(sizeof(*ptr) * (len + 1));
+		
+		_memcpy(ptr, c, len + 1);
+		rev_string(ptr);
+		_memcpy(store, ptr, (unsigned int)len);
+		free(ptr);
+	}
+	else
+	{
+		_memcpy(store, c, (unsigned int)len);
+	}
+
+	return (write(1, store, len));
+}
+
+
+
+
+/**
+ * _print_strings - prints out a string of characters passed into it to stdout
+ * @c: string input
+ *
+ * Return: length of byte written on success, -1 otherwise
+ */
+int _print_strings(char *c)
 {
 	int len = _strlen(c);
 	char store[1024];
 	
 	_memcpy(store, c, (unsigned)len);
+	free(c);
 
 	return (write(1, store, len));
 }
-
 
 
 
@@ -54,7 +85,10 @@ int print_number(int num)
 {
 	char *ptr = _itoa(num);
 	int len = _strlen(ptr);
+	char store[1024];
+	
+	_memcpy(store, ptr, (unsigned)len);
+	free(ptr);
 
-	return (write(1, ptr, len));
+	return (write(1, store, len));
 }
-

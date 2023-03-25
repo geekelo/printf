@@ -61,21 +61,23 @@ int format_handler(va_list ptr, char s)
 		case 'c':
 			return (_putchar(va_arg(ptr, int)));
 		case 's':
-			return (_puts(va_arg(ptr, char *)));
+			return (_puts(va_arg(ptr, char *), 0));
 		case 'd':
 			return (print_number(va_arg(ptr, int)));
 		case 'i':
 			return (print_number(convert_to_10(va_arg(ptr, int), 10)));
 		case 'b':
-			return (_puts(convert_to_base(va_arg(ptr, unsigned int), 2)));
+			return (_print_strings(convert_to_base(va_arg(ptr, unsigned int), 2)));
 		case 'u':
-			return (_puts(convert_to_base(va_arg(ptr, unsigned int), 10)));
+			return (_print_strings(convert_to_base(va_arg(ptr, unsigned int), 10)));
 		case 'o':
-			return (_puts(convert_to_base(va_arg(ptr, unsigned int), 8)));
+			return (_print_strings(convert_to_base(va_arg(ptr, unsigned int), 8)));
 		case 'x':
-			return (_puts(convert_to_base(va_arg(ptr, unsigned int), 16)));
+			return (_print_strings(convert_to_base(va_arg(ptr, unsigned int), 16)));
 		case 'X':
-			return (_puts(convert_to_base(va_arg(ptr, unsigned int), 17)));
+			return (_print_strings(convert_to_base(va_arg(ptr, unsigned int), 17)));
+		case 'r':
+			return (_puts(va_arg(ptr, char *), 1));
 		default:
 			if (s != '\0')
 			{
@@ -84,7 +86,7 @@ int format_handler(va_list ptr, char s)
 			}
 			else
 			{
-				_puts("invalid format specifier\n");
+				_puts("invalid format specifier\n", 0);
 			}
 	}
 	return (0);

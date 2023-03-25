@@ -40,6 +40,8 @@ int convert_to_10(int num, int base)
 		res += (s_num[i] - '0') * power;
 		power *= base;
 	}
+
+	free(s_num);
 	return (res);
 }
 

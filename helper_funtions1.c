@@ -16,23 +16,33 @@
  */
 char *_itoa(int num)
 {
+	int check_neg = num;
 	char *output = malloc(1);
 	char tmp;
 	unsigned int i, len = 0;
 
+	if (num < 0)
+		num = -num;
 	while (num)
 	{
 		output[len++] = num % 10 + '0';
 		num = num / 10;
 		output = _realloc(output, len, len + 1);
 	}
+
+	if (check_neg < 0)
+	{
+		output[len++] = '-';
+		output = _realloc(output, len, len + 1);
+	}
 	output[len] = '\0';
 	for (i = 0; i < len / 2; i++)
 	{
 		tmp = output[i];
-		output[i] = output[len - i -1];
+		output[i] = output[len - i - 1];
 		output[len - i - 1] = tmp;
 	}
+
 	return (output);
 }
 

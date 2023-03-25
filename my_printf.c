@@ -11,16 +11,16 @@
 
 /**
  * _printf - prints to standard output
- * @c: string input
+ * @format: string input
  *
  * Return: length of byte written on success, -1 otherwise
  */
 int _printf(const char *format, ...)
 {
-	int i = 0, len = 0, ret = 0;
+	int i = 0, ret = 0;
 	va_list ptr;
 
-	va_start(ptr, format);	
+	va_start(ptr, format);
 
 	for (; format[i]; i++)
 	{
@@ -64,13 +64,19 @@ int format_handler(va_list ptr, char s)
 			return (_puts(va_arg(ptr, char *)));
 		case 'd':
 			return (print_number(va_arg(ptr, int)));
-/*		case 'o':
-			char *o = base_converter(va_arg(ptr, int), 8);
-			return (_puts(o));
+		case 'i':
+			return (print_number(convert_to_10(va_arg(ptr, int), 10)));
+		case 'b':
+			return (_puts(convert_to_base(va_arg(ptr, unsigned int), 2)));
+		case 'u':
+			return (_puts(convert_to_base(va_arg(ptr, unsigned int), 10)));
+		case 'o':
+			return (_puts(convert_to_base(va_arg(ptr, unsigned int), 8)));
 		case 'x':
-			char *x = base_converter(va_arg(ptr, int), 16);
-			return (_puts(x));
-*/		default:
+			return (_puts(convert_to_base(va_arg(ptr, unsigned int), 16)));
+		case 'X':
+			return (_puts(convert_to_base(va_arg(ptr, unsigned int), 17)));
+		default:
 			if (s != '\0')
 			{
 				_putchar('%');

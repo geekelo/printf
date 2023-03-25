@@ -15,7 +15,11 @@
  */
 int _putchar(char c)
 {
-	return (write(1, &c, 1));
+	char store[1024];
+	
+	store[0] = c;
+	
+	return (write(1, store, 1));
 }
 
 
@@ -30,8 +34,11 @@ int _putchar(char c)
 int _puts(char *c)
 {
 	int len = _strlen(c);
+	char store[1024];
+	
+	_memcpy(store, c, (unsigned)len);
 
-	return (write(1, c, len));
+	return (write(1, store, len));
 }
 
 
@@ -39,7 +46,7 @@ int _puts(char *c)
 
 /**
  * print_number - prints out a number to stdout
- * @c: string input
+ * @num: number input
  *
  * Return: length of byte written on success, -1 otherwise
  */

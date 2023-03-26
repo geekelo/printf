@@ -78,16 +78,12 @@ int format_handler(va_list ptr, char s)
 			return (_print_strings(convert_to_base(va_arg(ptr, unsigned int), 17)));
 		case 'r':
 			return (_puts(va_arg(ptr, char *), 1));
-		default:
-			if (s != '\0')
-			{
-				_putchar('%');
-				_putchar(s);
-			}
-			else
-			{
-				_puts("invalid format specifier\n", 0);
-			}
+		case 'S':
+			return (_puts(va_arg(ptr, char *), 2));
+		case 'R':
+			return (_puts(va_arg(ptr, char *), 3));
+		case 'p':
+			return (print_address(va_arg(ptr, char *)));
 	}
 	return (0);
 }

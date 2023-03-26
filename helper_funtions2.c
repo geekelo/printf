@@ -27,6 +27,7 @@ char *_memcpy(char *dest, char *src, unsigned int n)
 /**
  * convert_to_10 - converts a positive integer to base 10
  * @num: input integer
+ * @base: base converting from.
  *
  * Return: converted number
  */
@@ -84,4 +85,58 @@ char *convert_to_base(unsigned int num, unsigned int base)
 	rev_string(tmp);
 
 	return (tmp);
+}
+
+
+
+/**
+ * non_printable - copies characters from one buffer to the other
+ *                 replacing non printable character with \x.
+ * @dest: destination buffer.
+ * @src: input characters.
+ * @len: numbers of characters to copy.
+ *
+ * Return: void
+ */
+void non_printable(char *dest, char *src, unsigned int len)
+{
+	unsigned int i, j, tmp = len;
+
+	for (i = 0, j = 0; i < len; i++, j++)
+	{
+		if ((src[i] > 0 && src[i] < 32) || src[i] >= 127)
+		{
+			dest = _realloc(dest, tmp, tmp + 2);
+			tmp += 2;
+			dest[j++] = '\\';
+			dest[j] = 'x';
+		}
+		dest[j] = src[i];
+	}
+}
+
+
+
+
+/**
+ * rot13 - copies characters from one buffer to the other
+ *         coverting the string to rot13.
+ * @dest: destination buffer.
+ * @src: input characters.
+ * @len: numbers of characters to copy.
+ *
+ * Return: void
+ */
+void rot13(char *dest, char *src, unsigned int len)
+{
+	unsigned int i;
+	char rot_13[] = "NOPQRSTUVWXYZABCDEFGHIJKL";
+
+	for (i = 0; i < len; i++)
+	{
+		if (src[i] >= 'a' && src[i] <= 'z')
+			dest[i] = rot_13[src[i] - 32 - 'A'];
+		else if (src[i] >= 'A' && src[i] <= 'Z')
+			dest[i] = rot_13[src[i] - 'A'];
+	}
 }

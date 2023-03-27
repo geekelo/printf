@@ -40,7 +40,6 @@ int _printf(const char *format, ...)
 
 /**
  * format_handler - handles format type from _printf()
- * @ptr: va_list ptr
  * @s: format specifier
  *
  * Return: length of byte accessed by ptr, 0 otherwise

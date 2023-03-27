@@ -14,7 +14,7 @@
 /**
  * struct op - Struct op
  *
- * @op: The operator
+ * @specifier: The format specifier
  * @f: The function associated
  */
 typedef struct op

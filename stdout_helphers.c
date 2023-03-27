@@ -14,6 +14,7 @@
 int _putchar(char c)
 {
 	char store[1024];
+
 	store[0] = c;
 
 	return (write(1, store, 1));
@@ -48,6 +49,9 @@ int _print_string(va_list ptr)
 {
 	char *p = va_arg(ptr, char *);
 	int i = 0, ret = 0;
+
+	if (p == NULL)
+		return (-1);
 
 	for (; p[i]; i++)
 		ret += _putchar(p[i]);

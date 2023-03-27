@@ -44,10 +44,14 @@ int _puts(char *c, int format)
 	char store[1024], *ptr;
 	int len, ret = 0;
 
-	if (c == NULL)
-		return (-1);
-
 	len = _strlen(c);
+
+	if (c == NULL)
+	{
+		c = "(nil)";
+		_memcpy(store, c, 5);
+		return (write(1, store, 5));
+	}
 
 	switch (format)
 	{

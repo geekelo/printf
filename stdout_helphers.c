@@ -95,6 +95,8 @@ int _print_decimal(va_list ptr)
 	num = va_arg(ptr, int);
 	if (num < 0)
 		check_num = 1, num = -num;
+	if (num == 0)
+		return (_putchar('0'));
 
 	tmp = convert_to_base(num, 10);
 	if (tmp == NULL)

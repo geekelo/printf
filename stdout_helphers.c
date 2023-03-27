@@ -54,7 +54,7 @@ int _print_string(va_list ptr)
 
 	p = va_arg(ptr, char *);
 	if (p == NULL)
-		exit (-1);
+		exit(-1);
 
 	for (; p[i]; i++)
 		ret += _putchar(p[i]);
@@ -100,7 +100,7 @@ int _print_decimal(va_list ptr)
 
 	tmp = convert_to_base(num, 10);
 	if (tmp == NULL)
-		exit (-1);
+		exit(-1);
 
 	if (check_num == 1)
 		ret += _putchar('-');

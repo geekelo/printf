@@ -55,7 +55,7 @@ int convert_to_10(int num, int base)
  *
  * Return: converted number in strings
  */
-char *convert_to_base(int num, unsigned int base)
+char *convert_to_base(unsigned int num, unsigned int base)
 {
 	char *tmp, *ptr;
 	char base_x[] = "0123456789abcdef";

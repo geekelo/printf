@@ -39,6 +39,11 @@ int _print_decimal(va_list);
 
 
 
+/*************** stdout_helphers.c ***************/
+int _print_binary(va_list);
+
+
+
 /*************** helper_functions1.c **************/
 char *_itoa(int num);
 int _atoi(char *s);
@@ -51,7 +56,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 /*************** helper_functions2.c **************/
 char *_memcpy(char *dest, char *src, unsigned int n);
 int convert_to_10(int num, int base);
-char *convert_to_base(int num, unsigned int base);
+char *convert_to_base(unsigned int num, unsigned int base);
 int non_printable(char *str);
 char *rot13(char *str);
 

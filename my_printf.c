@@ -87,6 +87,8 @@ int format_handler(va_list ptr, char s)
 			return (_puts(va_arg(ptr, char *), 3));
 		case 'p':
 			return (print_address(va_arg(ptr, char *)));
+		default:
+			return (-1);
 	}
 	return (0);
 }

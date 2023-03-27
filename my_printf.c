@@ -79,7 +79,7 @@ int format_handler(va_list ptr, char s)
 		case 'r':
 			return (_puts(va_arg(ptr, char *), 1));
 		case 'S':
-			return (_puts(va_arg(ptr, char *), 2));
+			return (non_printable(va_arg(ptr, char *)));
 		case 'R':
 			return (_puts(va_arg(ptr, char *), 3));
 		case 'p':

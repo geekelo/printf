@@ -4,7 +4,6 @@
  */
 
 #include "main.h"
-#include <unistd.h>
 #include <stdlib.h>
 
 /**
@@ -54,23 +53,15 @@ int _puts(char *c, int format)
 			_memcpy(store, ptr, (unsigned int)len);
 			free(ptr);
 			break;
-		case 2:
-			ptr = malloc(sizeof(*ptr) * len);
-
-			non_printable(ptr, c, len);
-			_memcpy(store, ptr, len);
-			free(ptr);
-			break;
 		case 3:
-			ptr = malloc(sizeof(*ptr) * len);
+			ptr = malloc(sizeof(*ptr) * (len + 1));
 
-			rot13(ptr, c, len);
-			_memcpy(store, ptr, len);
+			_memcpy(ptr, c, len + 1);
+			rot13(ptr);
+			_memcpy(store, ptr, (unsigned int)len);
 			free(ptr);
 			break;
 	}
-
-
 	return (write(1, store, len));
 }
 

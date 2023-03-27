@@ -9,6 +9,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <unistd.h>
 #define ABS(x) (((x) < 0) ? (-x) : (x))
 
 
@@ -27,7 +28,7 @@ char *convert_to_base(unsigned int num, unsigned int base);
 int convert_to_10(int num, int base);
 char *_memcpy(char *dest, char *src, unsigned int n);
 int _print_strings(char *c);
-void non_printable(char *dest, char *src, unsigned int len);
-void rot13(char *dest, char *src, unsigned int len);
+int non_printable(char *str);
+char *rot13(char *str);
 
 #endif

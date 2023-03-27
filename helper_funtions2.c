@@ -90,53 +90,59 @@ char *convert_to_base(unsigned int num, unsigned int base)
 
 
 /**
- * non_printable - copies characters from one buffer to the other
- *                 replacing non printable character with \x.
- * @dest: destination buffer.
- * @src: input characters.
- * @len: numbers of characters to copy.
+ * non_printable - prints astring replacing non printable character
+ *                 with \x, followed by the ASCII code value in
+ *                 hexadecimal (upper case - always 2 characters).
+ * @str: input string.
  *
  * Return: void
  */
-void non_printable(char *dest, char *src, unsigned int len)
+int non_printable(char *str)
 {
-	unsigned int i, j, tmp = len;
+	int i = 0, sum = 0;
 
-	for (i = 0, j = 0; i < len; i++, j++)
+	for (; str[i]; i++)
 	{
-		if ((src[i] > 0 && src[i] < 32) || src[i] >= 127)
+		if ((str[i] > 0 && str[i] < 32) || str[i] >= 127)
 		{
-			dest = _realloc(dest, tmp, tmp + 2);
-			tmp += 2;
-			dest[j++] = '\\';
-			dest[j] = 'x';
+			sum += _puts("\\x0", 0);
+			sum += _print_strings(convert_to_base(str[i], 17));
 		}
-		dest[j] = src[i];
+		else
+		{
+			sum += _putchar(str[i]);
+		}
 	}
+	return (sum);
 }
 
 
 
-
 /**
- * rot13 - copies characters from one buffer to the other
- *         coverting the string to rot13.
- * @dest: destination buffer.
- * @src: input characters.
- * @len: numbers of characters to copy.
+ * rot13 - encodes a string using rot13
+ * @str: input string
  *
- * Return: void
+ * Return: str
  */
-void rot13(char *dest, char *src, unsigned int len)
+char *rot13(char *str)
 {
-	unsigned int i;
-	char rot_13[] = "NOPQRSTUVWXYZABCDEFGHIJKL";
+	char *s1 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	char *s2 = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
+	int i;
 
-	for (i = 0; i < len; i++)
+	for (i = 0; str[i] != '\0'; i++)
 	{
-		if (src[i] >= 'a' && src[i] <= 'z')
-			dest[i] = rot_13[src[i] - 32 - 'A'];
-		else if (src[i] >= 'A' && src[i] <= 'Z')
-			dest[i] = rot_13[src[i] - 'A'];
+		int j;
+
+		for (j = 0; s1[j] != '\0'; j++)
+		{
+			if (str[i] == s1[j])
+			{
+				str[i] = s2[j];
+				break;
+			}
+		}
 	}
+
+	return (str);
 }

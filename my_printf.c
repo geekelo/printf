@@ -8,7 +8,6 @@
 #include <stdlib.h>
 
 
-
 /**
  * _printf - prints to standard output
  * @format: string input

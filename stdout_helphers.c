@@ -90,12 +90,18 @@ int _print_percent(va_list ptr)
 int _print_decimal(va_list ptr)
 {
 	char *tmp;
-	int i = 0, ret = 0;
+	int i = 0, ret = 0, num, check_num = 0;
 
-	tmp = _itoa(va_arg(ptr, int));
+	num = va_arg(ptr, int);
+	if (num < 0)
+		check_num = 1, num = -num;
+
+	tmp = convert_to_base(num, 10);
 	if (tmp == NULL)
 		exit (-1);
 
+	if (check_num == 1)
+		ret += _putchar('-');
 	for (; tmp[i]; i++)
 		ret += _putchar(tmp[i]);
 

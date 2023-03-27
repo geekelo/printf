@@ -21,6 +21,10 @@ char *_itoa(int num)
 	char tmp;
 	unsigned int i, len = 0;
 
+	output = malloc(1);
+	if (output == NULL)
+		return (NULL);
+
 	if (num < 0)
 		num = -num;
 	while (num)
@@ -28,12 +32,16 @@ char *_itoa(int num)
 		output[len++] = num % 10 + '0';
 		num = num / 10;
 		output = _realloc(output, len, len + 1);
+		if (output == NULL)
+			return (NULL);
 	}
 
 	if (check_neg < 0)
 	{
 		output[len++] = '-';
 		output = _realloc(output, len, len + 1);
+		if (output == NULL)
+			return (NULL);
 	}
 	output[len] = '\0';
 	for (i = 0; i < len / 2; i++)

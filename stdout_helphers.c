@@ -4,7 +4,6 @@
  */
 
 #include "main.h"
-#include <stdlib.h>
 
 /**
  * _putchar - prints out a single character passed into it
@@ -15,10 +14,14 @@
 int _putchar(char c)
 {
 	char store[1024];
+	int ret = 0;
 
 	store[0] = c;
 
-	return (write(1, store, 1));
+	if (store != NULL)
+		ret += write(1, store, 1);
+
+	return (ret);
 }
 
 
@@ -38,31 +41,41 @@ int _putchar(char c)
 int _puts(char *c, int format)
 {
 	char store[1024], *ptr;
-	int len = _strlen(c);
+	int len, ret = 0;
 
-	switch (format)
+	if (c != NULL)
 	{
-		case 0:
-			_memcpy(store, c, (unsigned int)len);
-			break;
-		case 1:
-			ptr = malloc(sizeof(*ptr) * (len + 1));
+		len = _strlen(c);
 
-			_memcpy(ptr, c, len + 1);
-			rev_string(ptr);
-			_memcpy(store, ptr, (unsigned int)len);
-			free(ptr);
-			break;
-		case 3:
-			ptr = malloc(sizeof(*ptr) * (len + 1));
+		switch (format)
+		{
+			case 0:
+				_memcpy(store, c, (unsigned int)len);
+				break;
+			case 1:
+				ptr = malloc(sizeof(*ptr) * (len + 1));
+				if (ptr == NULL)
+					return (0);
 
-			_memcpy(ptr, c, len + 1);
-			rot13(ptr);
-			_memcpy(store, ptr, (unsigned int)len);
-			free(ptr);
-			break;
+				_memcpy(ptr, c, len + 1);
+				rev_string(ptr);
+				_memcpy(store, ptr, (unsigned int)len);
+				free(ptr);
+				break;
+			case 3:
+				ptr = malloc(sizeof(*ptr) * (len + 1));
+				if (ptr == NULL)
+					return (0);
+
+				_memcpy(ptr, c, len + 1);
+				rot13(ptr);
+				_memcpy(store, ptr, (unsigned int)len);
+				free(ptr);
+				break;
+		}
+		ret += write(1, store, len);
 	}
-	return (write(1, store, len));
+	return (ret);
 }
 
 
@@ -76,13 +89,18 @@ int _puts(char *c, int format)
  */
 int _print_strings(char *c)
 {
-	int len = _strlen(c);
+	int len, ret = 0;
 	char store[1024];
 
-	_memcpy(store, c, (unsigned int)len);
-	free(c);
+	if (c != NULL)
+	{
+		len = _strlen(c);
+		_memcpy(store, c, (unsigned int)len);
+		free(c);
 
-	return (write(1, store, len));
+		ret += write(1, store, len);
+	}
+	return (ret);
 }
 
 
@@ -96,13 +114,19 @@ int _print_strings(char *c)
 int print_number(int num)
 {
 	char *ptr = _itoa(num);
-	int len = _strlen(ptr);
+	int len, ret = 0;
 	char store[1024];
 
-	_memcpy(store, ptr, (unsigned int)len);
-	free(ptr);
+	if (ptr != NULL)
+	{
+		len = _strlen(ptr);
+		_memcpy(store, ptr, (unsigned int)len);
+		free(ptr);
 
-	return (write(1, store, len));
+		ret += write(1, store, len);
+	}
+
+	return (ret);
 }
 
 
@@ -116,18 +140,27 @@ int print_number(int num)
  */
 int print_address(void *address)
 {
-	uintptr_t num = (uintptr_t)address, i = 0, len = 12;
-	char store[1024];
-
-	char *tmp;
+	uintptr_t num, i = 0, len = 12;
+	char store[1024], *tmp;
 	char ptr[] = "0123456789abcdef";
+	int ret = 0;
+
+	if (address == NULL)
+		return (0);
+
+
+	num = (uintptr_t)address, i = 0, len = 12;
 
 	tmp = malloc(sizeof(*tmp) * i + 1);
+	if (tmp == NULL)
+		return (0);
 
 	while (num)
 	{
 		tmp[i++] = ptr[num % 16];
 		tmp = _realloc(tmp, i, i + 1);
+		if (tmp == NULL)
+			return (0);
 		num = num / 16;
 	}
 	tmp[i] = '\0';
@@ -136,5 +169,7 @@ int print_address(void *address)
 	_memcpy(store, tmp, len);
 	free(tmp);
 
-	return (_puts("0x", 0) + write(1, store, len));
+	ret += (_puts("0x", 0) + write(1, store, len));
+
+	return (ret);
 }

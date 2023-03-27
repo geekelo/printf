@@ -74,11 +74,15 @@ char *convert_to_base(unsigned int num, unsigned int base)
 		ptr = base_x;
 
 	tmp = malloc(sizeof(*tmp) * i + 1);
+	if (tmp == NULL)
+		return (NULL);
 
 	while (num)
 	{
 		tmp[i++] = ptr[num % base];
 		tmp = _realloc(tmp, i, i + 1);
+		if (tmp == NULL)
+			return (NULL);
 		num = num / base;
 	}
 	tmp[i] = '\0';

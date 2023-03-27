@@ -41,6 +41,10 @@ int _print_decimal(va_list);
 
 /*************** stdout_helphers.c ***************/
 int _print_binary(va_list);
+int _print_unsigned(va_list);
+int _print_octal(va_list);
+int _print_hex(va_list);
+int _print_HEX(va_list);
 
 
 

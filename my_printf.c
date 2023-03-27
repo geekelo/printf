@@ -53,6 +53,10 @@ int (*format_handler(char s))(va_list)
 		{'d', _print_decimal},
 		{'i', _print_decimal},
 		{'b', _print_binary},
+		{'u', _print_unsigned},
+		{'o', _print_octal},
+		{'x', _print_hex},
+		{'X', _print_HEX},
 		{'\0', NULL}
 	};
 	int i = 0;

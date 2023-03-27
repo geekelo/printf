@@ -33,8 +33,6 @@ int _print_char(va_list ptr)
 {
 	char c;
 
-	if (ptr == NULL)
-		return (0);
 	c = va_arg(ptr, int);
 
 	return (_putchar(c));
@@ -53,9 +51,6 @@ int _print_string(va_list ptr)
 {
 	char *p;
 	int i = 0, ret = 0;
-
-	if (ptr == NULL)
-		return (0);
 
 	p = va_arg(ptr, char *);
 	if (p == NULL)

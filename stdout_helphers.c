@@ -16,11 +16,12 @@ int _putchar(char c)
 	char store[1024];
 	int ret = 0;
 
+	if (c < 0)
+		return (-1);
 	store[0] = c;
 
-	if (store != NULL)
-		ret += write(1, store, 1);
 
+	ret += write(1, store, 1);
 	return (ret);
 }
 
@@ -43,38 +44,39 @@ int _puts(char *c, int format)
 	char store[1024], *ptr;
 	int len, ret = 0;
 
-	if (c != NULL)
+	if (c == NULL)
+		return (-1);
+
+	len = _strlen(c);
+
+	switch (format)
 	{
-		len = _strlen(c);
+		case 0:
+			_memcpy(store, c, (unsigned int)len);
+			break;
+		case 1:
+			ptr = malloc(sizeof(*ptr) * (len + 1));
+			if (ptr == NULL)
+				return (0);
 
-		switch (format)
-		{
-			case 0:
-				_memcpy(store, c, (unsigned int)len);
-				break;
-			case 1:
-				ptr = malloc(sizeof(*ptr) * (len + 1));
-				if (ptr == NULL)
-					return (0);
+			_memcpy(ptr, c, len + 1);
+			rev_string(ptr);
+			_memcpy(store, ptr, (unsigned int)len);
+			free(ptr);
+			break;
+		case 3:
+			ptr = malloc(sizeof(*ptr) * (len + 1));
+			if (ptr == NULL)
+				return (0);
 
-				_memcpy(ptr, c, len + 1);
-				rev_string(ptr);
-				_memcpy(store, ptr, (unsigned int)len);
-				free(ptr);
-				break;
-			case 3:
-				ptr = malloc(sizeof(*ptr) * (len + 1));
-				if (ptr == NULL)
-					return (0);
-
-				_memcpy(ptr, c, len + 1);
-				rot13(ptr);
-				_memcpy(store, ptr, (unsigned int)len);
-				free(ptr);
-				break;
-		}
-		ret += write(1, store, len);
+			_memcpy(ptr, c, len + 1);
+			rot13(ptr);
+			_memcpy(store, ptr, (unsigned int)len);
+			free(ptr);
+			break;
 	}
+	ret += write(1, store, len);
+
 	return (ret);
 }
 

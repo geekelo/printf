@@ -57,7 +57,7 @@ int _puts(char *c, int format)
 		case 1:
 			ptr = malloc(sizeof(*ptr) * (len + 1));
 			if (ptr == NULL)
-				return (0);
+				return (-1);
 
 			_memcpy(ptr, c, len + 1);
 			rev_string(ptr);
@@ -67,7 +67,7 @@ int _puts(char *c, int format)
 		case 3:
 			ptr = malloc(sizeof(*ptr) * (len + 1));
 			if (ptr == NULL)
-				return (0);
+				return (-1);
 
 			_memcpy(ptr, c, len + 1);
 			rot13(ptr);

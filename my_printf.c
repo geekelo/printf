@@ -20,8 +20,6 @@ int _printf(const char *format, ...)
 	int i = 0, ret = 0;
 	va_list ptr;
 
-	if (format == NULL)
-		return (-1);
 
 	va_start(ptr, format);
 

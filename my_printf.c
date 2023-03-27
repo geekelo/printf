@@ -50,6 +50,8 @@ int (*format_handler(char s))(va_list)
 		{'c', _print_char},
 		{'s', _print_string},
 		{'%', _print_percent},
+		{'d', _print_decimal},
+		{'i', _print_decimal},
 		{'\0', NULL}
 	};
 	int i = 0;

@@ -54,7 +54,7 @@ int _print_string(va_list ptr)
 
 	p = va_arg(ptr, char *);
 	if (p == NULL)
-		return (0);
+		exit (-1);
 
 	for (; p[i]; i++)
 		ret += _putchar(p[i]);
@@ -77,4 +77,27 @@ int _print_percent(va_list ptr)
 		return (0);
 
 	return (_putchar('%'));
+}
+
+
+
+/**
+ * _print_decimal - prints out a integer input passed into it to stdout
+ * @ptr: va_list pointer
+ *
+ * Return: length of byte written on success.
+ */
+int _print_decimal(va_list ptr)
+{
+	char *tmp;
+	int i = 0, ret = 0;
+
+	tmp = _itoa(va_arg(ptr, int));
+	if (tmp == NULL)
+		exit (-1);
+
+	for (; tmp[i]; i++)
+		ret += _putchar(tmp[i]);
+
+	return (ret);
 }

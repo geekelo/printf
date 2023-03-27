@@ -70,11 +70,8 @@ int _print_string(va_list ptr)
  */
 int _print_percent(va_list ptr)
 {
-	char *p = va_arg(ptr, char *);
-	int i = 0;
-
-	for (; p[i]; i++)
-		;
+	if (ptr == NULL)
+		return (0);
 
 	return (_putchar('%'));
 }

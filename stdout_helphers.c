@@ -14,68 +14,25 @@
 int _putchar(char c)
 {
 	char store[1024];
-	int ret = 0;
-
 	store[0] = c;
 
-	if (store != NULL)
-		ret += write(1, store, 1);
-
-	return (ret);
+	return (write(1, store, 1));
 }
 
 
 
 
 /**
- * _puts - prints out a string of characters passed into it to stdout
- * @c: string input
- * @format: describes how the string should be printed out:
- *          0 - normal string output,
- *          1 - reversed string output,
- *          2 - none printable characters replaced with \x,
- *          3 - rot13'ed output.
+ * _print_char - prints a character passed into it to stdout
+ * @ptr: va_list pointer
  *
  * Return: length of byte written on success, -1 otherwise
  */
-int _puts(char *c, int format)
+int _print_char(va_list ptr)
 {
-	char store[1024], *ptr;
-	int len, ret = 0;
+	char c = va_arg(ptr, int);
 
-	if (c != NULL)
-	{
-		len = _strlen(c);
-
-		switch (format)
-		{
-			case 0:
-				_memcpy(store, c, (unsigned int)len);
-				break;
-			case 1:
-				ptr = malloc(sizeof(*ptr) * (len + 1));
-				if (ptr == NULL)
-					return (0);
-
-				_memcpy(ptr, c, len + 1);
-				rev_string(ptr);
-				_memcpy(store, ptr, (unsigned int)len);
-				free(ptr);
-				break;
-			case 3:
-				ptr = malloc(sizeof(*ptr) * (len + 1));
-				if (ptr == NULL)
-					return (0);
-
-				_memcpy(ptr, c, len + 1);
-				rot13(ptr);
-				_memcpy(store, ptr, (unsigned int)len);
-				free(ptr);
-				break;
-		}
-		ret += write(1, store, len);
-	}
-	return (ret);
+	return (_putchar(c));
 }
 
 
@@ -83,48 +40,17 @@ int _puts(char *c, int format)
 
 /**
  * _print_strings - prints out a string of characters passed into it to stdout
- * @c: string input
+ * @ptr: va_list pointer
  *
  * Return: length of byte written on success, -1 otherwise
  */
-int _print_strings(char *c)
+int _print_string(va_list ptr)
 {
-	int len, ret = 0;
-	char store[1024];
+	char *p = va_arg(ptr, char *);
+	int i = 0, ret = 0;
 
-	if (c != NULL)
-	{
-		len = _strlen(c);
-		_memcpy(store, c, (unsigned int)len);
-		free(c);
-
-		ret += write(1, store, len);
-	}
-	return (ret);
-}
-
-
-
-/**
- * print_number - prints out a number to stdout
- * @num: number input
- *
- * Return: length of byte written on success, -1 otherwise
- */
-int print_number(int num)
-{
-	char *ptr = _itoa(num);
-	int len, ret = 0;
-	char store[1024];
-
-	if (ptr != NULL)
-	{
-		len = _strlen(ptr);
-		_memcpy(store, ptr, (unsigned int)len);
-		free(ptr);
-
-		ret += write(1, store, len);
-	}
+	for (; p[i]; i++)
+		ret += _putchar(p[i]);
 
 	return (ret);
 }
@@ -133,43 +59,18 @@ int print_number(int num)
 
 
 /**
- * print_address - prints out address of a variable to stdout
- * @address: address input
+ * _print_percent - prints out % symbol to stdout
+ * @ptr: va_list pointer
  *
- * Return: length of byte written on success, -1 otherwise
+ * Return: 1
  */
-int print_address(void *address)
+int _print_percent(va_list ptr)
 {
-	uintptr_t num, i = 0, len = 12;
-	char store[1024], *tmp;
-	char ptr[] = "0123456789abcdef";
-	int ret = 0;
+	char *p = va_arg(ptr, char *);
+	int i = 0;
 
-	if (address == NULL)
-		return (0);
+	for (; p[i]; i++)
+		;
 
-
-	num = (uintptr_t)address, i = 0, len = 12;
-
-	tmp = malloc(sizeof(*tmp) * i + 1);
-	if (tmp == NULL)
-		return (0);
-
-	while (num)
-	{
-		tmp[i++] = ptr[num % 16];
-		tmp = _realloc(tmp, i, i + 1);
-		if (tmp == NULL)
-			return (0);
-		num = num / 16;
-	}
-	tmp[i] = '\0';
-	rev_string(tmp);
-
-	_memcpy(store, tmp, len);
-	free(tmp);
-
-	ret += (_puts("0x", 0) + write(1, store, len));
-
-	return (ret);
+	return (_putchar('%'));
 }

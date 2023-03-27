@@ -4,8 +4,6 @@
  */
 
 #include "main.h"
-#include <unistd.h>
-#include <stdlib.h>
 
 
 
@@ -20,23 +18,17 @@ int _printf(const char *format, ...)
 	int i = 0, ret = 0;
 	va_list ptr;
 
+	if (format == NULL)
+		return (-1);
+
 	va_start(ptr, format);
 
 	for (; format[i]; i++)
 	{
-		if (format[i] == '%' && format[i + 1] != '%')
-		{
-			ret += format_handler(ptr, format[i + 1]);
-			i++;
-			continue;
-		}
-		else if (format[i] == '%' && format[i + 1] == '%')
-		{
-			ret += _putchar('%');
-			i++;
-			continue;
-		}
-		ret += _putchar(format[i]);
+		if (format[i] == '%' && format_handler(format[i + 1]))
+			ret += format_handler(format[i++ + 1])(ptr);
+		else
+			ret += _putchar(format[i]);
 	}
 
 	va_end(ptr);
@@ -54,37 +46,21 @@ int _printf(const char *format, ...)
  *
  * Return: length of byte accessed by ptr, 0 otherwise
  */
-int format_handler(va_list ptr, char s)
+int (*format_handler(char s))(va_list)
 {
-	switch (s)
-	{
-		case 'c':
-			return (_putchar(va_arg(ptr, int)));
-		case 's':
-			return (_puts(va_arg(ptr, char *), 0));
-		case 'd':
-			return (print_number(va_arg(ptr, int)));
-		case 'i':
-			return (print_number(convert_to_10(va_arg(ptr, int), 10)));
-		case 'b':
-			return (_print_strings(convert_to_base(va_arg(ptr, unsigned int), 2)));
-		case 'u':
-			return (_print_strings(convert_to_base(va_arg(ptr, unsigned int), 10)));
-		case 'o':
-			return (_print_strings(convert_to_base(va_arg(ptr, unsigned int), 8)));
-		case 'x':
-			return (_print_strings(convert_to_base(va_arg(ptr, unsigned int), 16)));
-		case 'X':
-			return (_print_strings(convert_to_base(va_arg(ptr, unsigned int), 17)));
-		case 'r':
-			return (_puts(va_arg(ptr, char *), 1));
-		case 'S':
-			return (non_printable(va_arg(ptr, char *)));
-		case 'R':
-			return (_puts(va_arg(ptr, char *), 3));
-		case 'p':
-			return (print_address(va_arg(ptr, char *)));
-	}
-	return (0);
-}
+	handler ops[] = {
+		{'c', _print_char},
+		{'s', _print_string},
+		{'%', _print_percent},
+		{'\0', NULL}
+	};
+	int i = 0;
 
+	for (; ops[i].specifier; i++)
+	{
+		if (ops[i].specifier == s)
+			return (ops[i].f);
+	}
+
+	return (NULL);
+}

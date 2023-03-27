@@ -40,7 +40,7 @@ int _print_char(va_list ptr)
 
 
 /**
- * _print_strings - prints out a string of characters passed into it to stdout
+ * _print_string - prints out a string of characters passed into it to stdout
  * @ptr: va_list pointer
  *
  * Return: length of byte written on success, -1 otherwise
@@ -51,7 +51,7 @@ int _print_string(va_list ptr)
 	int i = 0, ret = 0;
 
 	if (p == NULL)
-		return (-1);
+		return (0);
 
 	for (; p[i]; i++)
 		ret += _putchar(p[i]);

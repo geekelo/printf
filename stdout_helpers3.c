@@ -70,7 +70,7 @@ int _print_address(va_list pt)
 		tmp[i++] = ptr[num % 16];
 		tmp = _realloc(tmp, i, i + 1);
 		if (tmp == NULL)
-			return (0);
+			exit(-1);
 		num = num / 16;
 	}
 	tmp[i] = '\0';
@@ -81,6 +81,6 @@ int _print_address(va_list pt)
 
 	for (i = 0; tmp[i]; i++)
 		_putchar(tmp[i]);
-
+	free(tmp);
 	return (25);
 }

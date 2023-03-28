@@ -26,6 +26,7 @@ int _putchar(char c)
 /**
  * _print_char - prints a character passed into it to stdout
  * @ptr: va_list pointer
+ * @check: checks if input parameter is LONG or SHORT
  *
  * Return: length of byte written on success, -1 otherwise
  */
@@ -44,6 +45,7 @@ int _print_char(va_list ptr, __attribute__((unused)) int check)
 /**
  * _print_string - prints out a string of characters passed into it to stdout
  * @ptr: va_list pointer
+ * @check: checks if input parameter is LONG or SHORT
  *
  * Return: length of byte written on success, -1 otherwise
  */
@@ -68,6 +70,7 @@ int _print_string(va_list ptr, __attribute__((unused)) int check)
 /**
  * _print_percent - prints out % symbol to stdout
  * @ptr: va_list pointer
+ * @check: checks if input parameter is LONG or SHORT
  *
  * Return: 1
  */
@@ -84,6 +87,7 @@ int _print_percent(va_list ptr, __attribute__((unused)) int check)
 /**
  * _print_decimal - prints out a integer input passed into it to stdout
  * @ptr: va_list pointer
+ * @check: checks if input parameter is LONG or SHORT
  *
  * Return: length of byte written on success.
  */

@@ -7,6 +7,7 @@
 /**
  * _print_binary - prints out a integer in binary to stdout
  * @ptr: va_list pointer
+ * @check: checks if input parameter is LONG or SHORT
  *
  * Return: length of byte written on success.
  */
@@ -38,6 +39,7 @@ int _print_binary(va_list ptr, __attribute__((unused)) int check)
 /**
  * _print_unsigned - prints out unsigned integer to stdout
  * @ptr: va_list pointer
+ * @check: checks if input parameter is LONG or SHORT
  *
  * Return: length of byte written on success.
  */
@@ -69,6 +71,7 @@ int _print_unsigned(va_list ptr, __attribute__((unused)) int check)
 /**
  * _print_octal - prints out a integer in octal value to stdout
  * @ptr: va_list pointer
+ * @check: checks if input parameter is LONG or SHORT
  *
  * Return: length of byte written on success.
  */
@@ -100,6 +103,7 @@ int _print_octal(va_list ptr, __attribute__((unused)) int check)
 /**
  * _print_hex - prints out a integer in hexadecimal to stdout
  * @ptr: va_list pointer
+ * @check: checks if input parameter is LONG or SHORT
  *
  * Return: length of byte written on success.
  */
@@ -132,6 +136,7 @@ int _print_hex(va_list ptr, __attribute__((unused)) int check)
 /**
  * _print_HEX - prints out a integer in HEX to stdout
  * @ptr: va_list pointer
+ * @check: checks if input parameter is LONG or SHORT
  *
  * Return: length of byte written on success.
  */

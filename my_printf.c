@@ -44,7 +44,7 @@ int _printf(const char *format, ...)
 
 
 /**
- * format_handler - handles format type from _printf()
+ * format_specifier - handles format type from _printf()
  * @s: format specifier
  *
  * Return: length of byte accessed by ptr, 0 otherwise
@@ -79,6 +79,13 @@ int (*format_specifier(char s))(va_list, int)
 	return (NULL);
 }
 
+/**
+ * length_check - checks for LONG or SHORT specifier.
+ * @s: input string character
+ * @tmp: value is increamented if true
+ *
+ * Return: either LONG or SHORT
+ */
 
 
 int length_check(char s, __attribute__((unused)) int *tmp)

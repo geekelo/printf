@@ -52,6 +52,7 @@ int convert_to_10(int num, int base)
  * convert_to_base - converts a positive integer from base 10
  * @num: input integer
  * @base: base to convert to.
+ * @check: checks if input parameter is LONG or SHORT
  *
  * Return: converted number in strings
  */

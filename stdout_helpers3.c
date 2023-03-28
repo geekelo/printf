@@ -10,6 +10,7 @@
  *                 replacing non printable characters with \x followed by the
  *                 ASCII code value.
  * @ptr: va_list pointer
+ * @check: checks if input parameter is LONG or SHORT
  *
  * Return: length of byte written on success, -1 otherwise
  */
@@ -46,6 +47,7 @@ int _print_String(va_list ptr, __attribute__((unused)) int check)
 /**
  * _print_address - prints out memory address of a variable to stdout
  * @pt: va_list pointer
+ * @check: checks if input parameter is LONG or SHORT
  *
  * Return: length of byte written on success, -1 otherwise
  */
@@ -92,6 +94,7 @@ int _print_address(va_list pt, __attribute__((unused)) int check)
 /**
  * _print_rev - prints out a string in reverse to stdout
  * @ptr: va_list pointer
+ * @check: checks if input parameter is LONG or SHORT
  *
  * Return: length of byte written on success, -1 otherwise
  */
@@ -118,6 +121,7 @@ int _print_rev(va_list ptr, __attribute__((unused)) int check)
 /**
  * _print_rot13 - prints out a string encoded in rot13 to stdout
  * @ptr: va_list pointer
+ * @check: checks if input parameter is LONG or SHORT
  *
  * Return: length of byte written on success, -1 otherwise
  */
@@ -146,4 +150,3 @@ int _print_rot13(va_list ptr, __attribute__((unused)) int check)
 	free(tmp);
 	return (ret);
 }
-

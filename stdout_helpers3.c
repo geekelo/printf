@@ -83,5 +83,5 @@ int _print_address(va_list pt)
 	for (i = 0; tmp[i]; i++)
 		ret += _putchar(tmp[i]);
 	free(tmp);
-	return (25);
+	return (ret);
 }

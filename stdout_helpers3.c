@@ -133,12 +133,15 @@ int _print_rot13(va_list ptr)
 	for (; p[i]; i++)
 		;
 
-	tmp = malloc(sizeof(*tmp) * i + 1);
+	tmp = malloc(sizeof(*tmp) * (i + 1));
+	if (tmp == NULL)
+		exit(-1);
+
 	_memcpy(tmp, p, i + 1);
 	rot13(tmp);
 
 	for (i = 0; tmp[i]; i++)
-		ret += _putchar(p[i]);
+		ret += _putchar(tmp[i]);
 
 	free(tmp);
 	return (ret);

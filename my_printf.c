@@ -60,6 +60,7 @@ int (*format_handler(char s))(va_list)
 		{'S', _print_String},
 		{'p', _print_address},
 		{'r', _print_rev},
+		{'R', _print_rot13},
 		{'\0', NULL}
 	};
 	int i = 0;

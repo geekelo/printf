@@ -52,6 +52,7 @@ int _print_HEX(va_list);
 int _print_String(va_list);
 int _print_address(va_list);
 int _print_rev(va_list);
+int _print_rot13(va_list ptr);
 
 
 

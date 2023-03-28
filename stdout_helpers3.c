@@ -111,3 +111,36 @@ int _print_rev(va_list ptr)
 
 	return (ret);
 }
+
+
+
+
+/**
+ * _print_rot13 - prints out a string encoded in rot13 to stdout
+ * @ptr: va_list pointer
+ *
+ * Return: length of byte written on success, -1 otherwise
+ */
+int _print_rot13(va_list ptr)
+{
+	char *p, *tmp;
+	int i = 0, ret = 0;
+
+	p = va_arg(ptr, char *);
+	if (p == NULL)
+		exit(-1);
+
+	for (; p[i]; i++)
+		;
+
+	tmp = malloc(sizeof(*tmp) * i + 1);
+	_memcpy(tmp, p, i + 1);
+	rot13(tmp);
+
+	for (i = 0; tmp[i]; i++)
+		ret += _putchar(p[i]);
+
+	free(tmp);
+	return (ret);
+}
+

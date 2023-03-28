@@ -39,3 +39,48 @@ int _print_String(va_list ptr)
 
 	return (ret);
 }
+
+
+
+
+/**
+ * _print_address - prints out memory address of a variable to stdout
+ * @ptr: va_list pointer
+ *
+ * Return: length of byte written on success, -1 otherwise
+ */
+int _print_address(va_list pt)
+{
+	uintptr_t num, i = 0;
+	char *tmp;
+	char ptr[] = "0123456789abcdef";
+
+	if (ptr == NULL)
+		exit (-1);
+
+
+	num = (uintptr_t)va_arg(pt, void *);
+
+	tmp = malloc(sizeof(*tmp) * i + 1);
+	if (tmp == NULL)
+		return (0);
+
+	while (num)
+	{
+		tmp[i++] = ptr[num % 16];
+		tmp = _realloc(tmp, i, i + 1);
+		if (tmp == NULL)
+			return (0);
+		num = num / 16;
+	}
+	tmp[i] = '\0';
+	rev_string(tmp);
+
+	_putchar('0');
+	_putchar('x');
+	
+	for (i = 0; tmp[i]; i++)
+		_putchar(tmp[i]);
+
+	return (25);
+}

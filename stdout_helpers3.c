@@ -45,7 +45,7 @@ int _print_String(va_list ptr)
 
 /**
  * _print_address - prints out memory address of a variable to stdout
- * @ptr: va_list pointer
+ * @pt: va_list pointer
  *
  * Return: length of byte written on success, -1 otherwise
  */
@@ -56,7 +56,7 @@ int _print_address(va_list pt)
 	char ptr[] = "0123456789abcdef";
 
 	if (ptr == NULL)
-		exit (-1);
+		exit(-1);
 
 
 	num = (uintptr_t)va_arg(pt, void *);
@@ -78,7 +78,7 @@ int _print_address(va_list pt)
 
 	_putchar('0');
 	_putchar('x');
-	
+
 	for (i = 0; tmp[i]; i++)
 		_putchar(tmp[i]);
 

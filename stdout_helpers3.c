@@ -54,6 +54,7 @@ int _print_address(va_list pt)
 	uintptr_t num, i = 0;
 	char *tmp;
 	char ptr[] = "0123456789abcdef";
+	int ret = 0;
 
 	if (ptr == NULL)
 		exit(-1);
@@ -76,11 +77,11 @@ int _print_address(va_list pt)
 	tmp[i] = '\0';
 	rev_string(tmp);
 
-	_putchar('0');
-	_putchar('x');
+	ret += _putchar('0');
+	ret += _putchar('x');
 
 	for (i = 0; tmp[i]; i++)
-		_putchar(tmp[i]);
+		ret += _putchar(tmp[i]);
 	free(tmp);
 	return (25);
 }

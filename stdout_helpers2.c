@@ -10,16 +10,19 @@
  *
  * Return: length of byte written on success.
  */
-int _print_binary(va_list ptr)
+int _print_binary(va_list ptr, __attribute__((unused)) int check)
 {
 	char *tmp;
-	unsigned int i = 0, ret = 0, num;
+	unsigned long i = 0, ret = 0, num;
 
-	num = va_arg(ptr, unsigned int);
+	if (check == LONG)
+		num = va_arg(ptr, unsigned long);
+	else
+		num = va_arg(ptr, unsigned int);
 	if (num == 0)
 		return (_putchar('0'));
 
-	tmp = convert_to_base(num, 2);
+	tmp = convert_to_base(num, 2, check);
 	if (tmp == NULL)
 		exit(-1);
 
@@ -38,16 +41,19 @@ int _print_binary(va_list ptr)
  *
  * Return: length of byte written on success.
  */
-int _print_unsigned(va_list ptr)
+int _print_unsigned(va_list ptr, __attribute__((unused)) int check)
 {
 	char *tmp;
-	unsigned int i = 0, ret = 0, num;
+	unsigned long i = 0, ret = 0, num;
 
-	num = va_arg(ptr, unsigned int);
+	if (check == LONG)
+		num = va_arg(ptr, unsigned long);
+	else
+		num = va_arg(ptr, unsigned int);
 	if (num == 0)
 		return (_putchar('0'));
 
-	tmp = convert_to_base(num, 10);
+	tmp = convert_to_base(num, 10, check);
 	if (tmp == NULL)
 		exit(-1);
 
@@ -66,16 +72,19 @@ int _print_unsigned(va_list ptr)
  *
  * Return: length of byte written on success.
  */
-int _print_octal(va_list ptr)
+int _print_octal(va_list ptr, __attribute__((unused)) int check)
 {
 	char *tmp;
-	unsigned int i = 0, ret = 0, num;
+	unsigned long i = 0, ret = 0, num;
 
-	num = va_arg(ptr, unsigned int);
+	if (check == LONG)
+		num = va_arg(ptr, unsigned long);
+	else
+		num = va_arg(ptr, unsigned int);
 	if (num == 0)
 		return (_putchar('0'));
 
-	tmp = convert_to_base(num, 8);
+	tmp = convert_to_base(num, 8, check);
 	if (tmp == NULL)
 		exit(-1);
 
@@ -94,16 +103,20 @@ int _print_octal(va_list ptr)
  *
  * Return: length of byte written on success.
  */
-int _print_hex(va_list ptr)
+int _print_hex(va_list ptr, __attribute__((unused)) int check)
 {
 	char *tmp;
-	unsigned int i = 0, ret = 0, num;
+	unsigned long i = 0, ret = 0, num;
 
-	num = va_arg(ptr, unsigned int);
+	if (check == LONG)
+		num = va_arg(ptr, unsigned long);
+	else
+		num = va_arg(ptr, unsigned int);
+
 	if (num == 0)
 		return (_putchar('0'));
 
-	tmp = convert_to_base(num, 16);
+	tmp = convert_to_base(num, 16, check);
 	if (tmp == NULL)
 		exit(-1);
 
@@ -122,16 +135,21 @@ int _print_hex(va_list ptr)
  *
  * Return: length of byte written on success.
  */
-int _print_HEX(va_list ptr)
+int _print_HEX(va_list ptr, __attribute__((unused)) int check)
 {
 	char *tmp;
-	unsigned int i = 0, ret = 0, num;
+	unsigned long i = 0, ret = 0, num;
 
-	num = va_arg(ptr, unsigned int);
+	if (check == LONG)
+		num = va_arg(ptr, unsigned long);
+	else
+		num = va_arg(ptr, unsigned int);
+
+
 	if (num == 0)
 		return (_putchar('0'));
 
-	tmp = convert_to_base(num, 17);
+	tmp = convert_to_base(num, 17, check);
 	if (tmp == NULL)
 		exit(-1);
 

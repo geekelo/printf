@@ -55,15 +55,18 @@ int convert_to_10(int num, int base)
  *
  * Return: converted number in strings
  */
-char *convert_to_base(unsigned int num, unsigned int base)
+char *convert_to_base(unsigned long num, unsigned int base, int check)
 {
 	char *tmp, *ptr;
 	char base_x[] = "0123456789abcdef";
 	char base_X[] = "0123456789ABCDEF";
-	unsigned int i = 0;
+	unsigned long i = 0;
 
 	if (num == 0 || base == 0)
 		return (NULL);
+
+	if (check == SHORT)
+		num = (short)num;
 
 	if (base == 17)
 	{

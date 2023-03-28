@@ -38,8 +38,8 @@ int main(void)
     len2 = printf("Percent:[%%]\n");
     _printf("Len:[%d]\n", len);
     printf("Len:[%d]\n", len2);
-    _printf("Unknown:[%R]\n", "reverse hello");
-    printf("Unknown:[%r]\n");
+    _printf("Unknown:[%w]\n");
+    printf("Unknown:[%d]\n");
   return (0);
 }
 

@@ -13,7 +13,7 @@
  *
  * Return: length of byte written on success, -1 otherwise
  */
-int _print_String(va_list ptr)
+int _print_String(va_list ptr, __attribute__((unused)) int check)
 {
 	char *p;
 	int i = 0, ret = 0;
@@ -29,7 +29,7 @@ int _print_String(va_list ptr)
 			ret += _putchar('\\');
 			ret += _putchar('x');
 			ret += _putchar(p[i] / 16 + '0');
-			ret += _putchar(*convert_to_base(p[i], 17));
+			ret += _putchar(*convert_to_base(p[i], 17, LONG));
 		}
 		else
 		{
@@ -49,7 +49,7 @@ int _print_String(va_list ptr)
  *
  * Return: length of byte written on success, -1 otherwise
  */
-int _print_address(va_list pt)
+int _print_address(va_list pt, __attribute__((unused)) int check)
 {
 	uintptr_t num, i = 0;
 	char *tmp;
@@ -95,7 +95,7 @@ int _print_address(va_list pt)
  *
  * Return: length of byte written on success, -1 otherwise
  */
-int _print_rev(va_list ptr)
+int _print_rev(va_list ptr, __attribute__((unused)) int check)
 {
 	char *p;
 	int i = 0, ret = 0;
@@ -121,7 +121,7 @@ int _print_rev(va_list ptr)
  *
  * Return: length of byte written on success, -1 otherwise
  */
-int _print_rot13(va_list ptr)
+int _print_rot13(va_list ptr, __attribute__((unused)) int check)
 {
 	char *p, *tmp;
 	int i = 0, ret = 0;

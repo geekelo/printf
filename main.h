@@ -10,7 +10,8 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <unistd.h>
-
+#define LONG 1
+#define SHORT 2
 
 /********************* my_printf.c *****************/
 /**
@@ -22,37 +23,38 @@
 typedef struct op
 {
 	char specifier;
-	int (*f)(va_list);
-} handler;
+	int (*f)(va_list, int);
+} specifiers;
 
 int _printf(const char *format, ...);
-int (*format_handler(char s))(va_list);
+int (*format_specifier(char s))(va_list, int);
+int length_check(char, int *);
 
 
 
 /*************** stdout_helphers.c ***************/
 int _putchar(char);
-int _print_char(va_list);
-int _print_string(va_list);
-int _print_percent(va_list);
-int _print_decimal(va_list);
+int _print_char(va_list, int);
+int _print_string(va_list, int);
+int _print_percent(va_list, int);
+int _print_decimal(va_list, int);
 
 
 
 /*************** stdout_helphers2.c ***************/
-int _print_binary(va_list);
-int _print_unsigned(va_list);
-int _print_octal(va_list);
-int _print_hex(va_list);
-int _print_HEX(va_list);
+int _print_binary(va_list, int);
+int _print_unsigned(va_list, int);
+int _print_octal(va_list, int);
+int _print_hex(va_list, int);
+int _print_HEX(va_list, int);
 
 
 
 /*************** stdout_helphers3.c ***************/
-int _print_String(va_list);
-int _print_address(va_list);
-int _print_rev(va_list);
-int _print_rot13(va_list ptr);
+int _print_String(va_list, int);
+int _print_address(va_list, int);
+int _print_rev(va_list, int);
+int _print_rot13(va_list, int);
 
 
 
@@ -68,7 +70,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 /*************** helper_functions2.c **************/
 char *_memcpy(char *dest, char *src, unsigned int n);
 int convert_to_10(int num, int base);
-char *convert_to_base(unsigned int num, unsigned int base);
+char *convert_to_base(unsigned long num, unsigned int base, int check);
 int non_printable(char *str);
 char *rot13(char *str);
 

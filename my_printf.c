@@ -14,7 +14,7 @@
  */
 int _printf(const char *format, ...)
 {
-	int i = 0, ret = 0;
+	int i = 0, ret = 0, check, tmp;
 	va_list ptr;
 
 	if (format == NULL || ptr == NULL)
@@ -24,8 +24,13 @@ int _printf(const char *format, ...)
 
 	for (; format[i]; i++)
 	{
-		if (format[i] == '%' && format_handler(format[i + 1]))
-			ret += format_handler(format[i++ + 1])(ptr);
+		check = 0, tmp = 0;
+
+		if (format[i] == '%')
+			check = length_check(format[i + 1], &tmp);
+
+		if (format[i] == '%' && format_specifier(format[i + 1 + tmp]))
+			ret += format_specifier(format[i++ + 1 + tmp])(ptr, check);
 		else
 			ret += _putchar(format[i]);
 	}
@@ -44,9 +49,9 @@ int _printf(const char *format, ...)
  *
  * Return: length of byte accessed by ptr, 0 otherwise
  */
-int (*format_handler(char s))(va_list)
+int (*format_specifier(char s))(va_list, int)
 {
-	handler ops[] = {
+	specifiers ops[] = {
 		{'c', _print_char},
 		{'s', _print_string},
 		{'%', _print_percent},
@@ -72,4 +77,24 @@ int (*format_handler(char s))(va_list)
 	}
 
 	return (NULL);
+}
+
+
+
+int length_check(char s, __attribute__((unused)) int *tmp)
+{
+	int checker __attribute__((unused));
+
+	if (s == 'l')
+	{
+		checker = *tmp++;
+		return (LONG);
+	}
+	else if (s == 'h')
+	{
+		checker = *tmp++;
+		return (SHORT);
+	}
+
+	return (0);
 }

@@ -29,7 +29,7 @@ int _putchar(char c)
  *
  * Return: length of byte written on success, -1 otherwise
  */
-int _print_char(va_list ptr)
+int _print_char(va_list ptr, __attribute__((unused)) int check)
 {
 	char c;
 
@@ -47,7 +47,7 @@ int _print_char(va_list ptr)
  *
  * Return: length of byte written on success, -1 otherwise
  */
-int _print_string(va_list ptr)
+int _print_string(va_list ptr, __attribute__((unused)) int check)
 {
 	char *p;
 	int i = 0, ret = 0;
@@ -71,7 +71,7 @@ int _print_string(va_list ptr)
  *
  * Return: 1
  */
-int _print_percent(va_list ptr)
+int _print_percent(va_list ptr, __attribute__((unused)) int check)
 {
 	if (ptr == NULL)
 		return (0);
@@ -87,18 +87,22 @@ int _print_percent(va_list ptr)
  *
  * Return: length of byte written on success.
  */
-int _print_decimal(va_list ptr)
+int _print_decimal(va_list ptr, __attribute__((unused)) int check)
 {
 	char *tmp;
-	int i = 0, ret = 0, num, check_num = 0;
+	long i = 0, ret = 0, num, check_num = 0;
 
-	num = va_arg(ptr, int);
+	if (check == LONG)
+		num = va_arg(ptr, long);
+	else
+		num = va_arg(ptr, int);
+
 	if (num < 0)
 		check_num = 1, num = -num;
 	if (num == 0)
 		return (_putchar('0'));
 
-	tmp = convert_to_base(num, 10);
+	tmp = convert_to_base(num, 10, check);
 	if (tmp == NULL)
 		exit(-1);
 

@@ -24,7 +24,7 @@ int _print_String(va_list ptr)
 
 	for (; p[i]; i++)
 	{
-		if (p[i] < 32)
+		if ((p[i] < 32 && p[i] > 0) || p[i] >= 127)
 		{
 			ret += _putchar('\\');
 			ret += _putchar('x');

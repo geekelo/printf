@@ -29,7 +29,11 @@ int _printf(const char *format, ...)
 		if (format[i] == '%')
 			check = length_check(format[i + 1], &tmp);
 
-		if (format[i] == '%' && format_specifier(format[i + 1 + tmp]))
+		if (format[i] == '%' && format_specifier(format[i + 1 + tmp]) == NULL)
+		{
+			return (-1);
+		}
+		else if (format[i] == '%' && format_specifier(format[i + 1 + tmp]))
 		{
 			ret += format_specifier(format[i + 1 + tmp])(ptr, check);
 			i += tmp + 1;

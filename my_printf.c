@@ -57,6 +57,7 @@ int (*format_handler(char s))(va_list)
 		{'o', _print_octal},
 		{'x', _print_hex},
 		{'X', _print_HEX},
+		{'S', _print_String},
 		{'\0', NULL}
 	};
 	int i = 0;

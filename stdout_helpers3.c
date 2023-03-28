@@ -56,11 +56,13 @@ int _print_address(va_list pt)
 	char ptr[] = "0123456789abcdef";
 	int ret = 0;
 
-	if (ptr == NULL)
+	if (pt == NULL)
 		exit(-1);
 
 
 	num = (uintptr_t)va_arg(pt, void *);
+	if (num == 0)
+		exit(-1);
 
 	tmp = malloc(sizeof(*tmp) * i + 1);
 	if (tmp == NULL)

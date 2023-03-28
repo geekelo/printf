@@ -28,7 +28,7 @@ int _print_String(va_list ptr)
 		{
 			ret += _putchar('\\');
 			ret += _putchar('x');
-			ret += _putchar('0');
+			ret += _putchar(p[i] / 16 + '0');
 			ret += _putchar(*convert_to_base(p[i], 17));
 		}
 		else

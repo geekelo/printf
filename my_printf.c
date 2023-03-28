@@ -31,7 +31,7 @@ int _printf(const char *format, ...)
 
 		if (format[i] == '%' && format_specifier(format[i + 1 + tmp]) == NULL)
 		{
-			return (-1);
+			exit(-1);
 		}
 		else if (format[i] == '%' && format_specifier(format[i + 1 + tmp]))
 		{

@@ -61,8 +61,6 @@ int _print_address(va_list pt)
 
 
 	num = (uintptr_t)va_arg(pt, void *);
-	if (num == 0)
-		exit(-1);
 
 	tmp = malloc(sizeof(*tmp) * i + 1);
 	if (tmp == NULL)
@@ -85,5 +83,31 @@ int _print_address(va_list pt)
 	for (i = 0; tmp[i]; i++)
 		ret += _putchar(tmp[i]);
 	free(tmp);
+	return (ret);
+}
+
+
+
+
+/**
+ * _print_rev - prints out a string in reverse to stdout
+ * @ptr: va_list pointer
+ *
+ * Return: length of byte written on success, -1 otherwise
+ */
+int _print_rev(va_list ptr)
+{
+	char *p;
+	int i = 0, ret = 0;
+
+	p = va_arg(ptr, char *);
+	if (p == NULL)
+		exit(-1);
+
+	for (; p[i]; i++)
+		;
+	for (--i; i >= 0; i--)
+		ret += _putchar(p[i]);
+
 	return (ret);
 }

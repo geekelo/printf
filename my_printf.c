@@ -59,6 +59,7 @@ int (*format_handler(char s))(va_list)
 		{'X', _print_HEX},
 		{'S', _print_String},
 		{'p', _print_address},
+		{'r', _print_rev},
 		{'\0', NULL}
 	};
 	int i = 0;

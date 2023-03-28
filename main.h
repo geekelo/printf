@@ -50,7 +50,8 @@ int _print_HEX(va_list);
 
 /*************** stdout_helphers3.c ***************/
 int _print_String(va_list);
-int _print_address(va_list ptr);
+int _print_address(va_list);
+int _print_rev(va_list);
 
 
 

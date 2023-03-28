@@ -4,7 +4,7 @@
  */
 
 #include "main.h"
-
+#include <stdio.h>
 
 /**
  * _printf - prints to standard output
@@ -30,9 +30,14 @@ int _printf(const char *format, ...)
 			check = length_check(format[i + 1], &tmp);
 
 		if (format[i] == '%' && format_specifier(format[i + 1 + tmp]))
-			ret += format_specifier(format[i++ + 1 + tmp])(ptr, check);
+		{
+			ret += format_specifier(format[i + 1 + tmp])(ptr, check);
+			i += tmp + 1;
+		}
 		else
+		{
 			ret += _putchar(format[i]);
+		}
 	}
 
 	va_end(ptr);
@@ -90,16 +95,16 @@ int (*format_specifier(char s))(va_list, int)
 
 int length_check(char s, __attribute__((unused)) int *tmp)
 {
-	int checker __attribute__((unused));
+	int *ptr = tmp;
 
 	if (s == 'l')
 	{
-		checker = *tmp++;
+		*ptr += 1;
 		return (LONG);
 	}
 	else if (s == 'h')
 	{
-		checker = *tmp++;
+		*ptr += 1;
 		return (SHORT);
 	}
 

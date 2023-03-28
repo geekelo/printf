@@ -18,8 +18,8 @@ int main(void)
     len2 = printf("Let's try to printf a simple sentence.\n");
     ui = (unsigned int)INT_MAX + 1024;
     addr = (void *)0x7ffe637541f0;
-    _printf("Length:[%d, %i]\n", len, len);
-    printf("Length:[%d, %i]\n", len2, printf("Address:[%p]\n", &len));
+    _printf("Length:[%ld, %hi]\n", len, len);
+    printf("Length:[%ld, %hi]\n", len2, printf("Address:[%p]\n", &len));
     _printf("Negative:[%d]\n", -762534);
     printf("Negative:[%d]\n", -762534);
     _printf("Unsigned:[%u]\n", ui);
